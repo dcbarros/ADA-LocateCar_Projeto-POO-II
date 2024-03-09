@@ -1,37 +1,19 @@
 package com.ada_locate;
 
-import com.ada_locate.infra.DAO;
+import com.ada_locate.controller.ClientController;
 import com.ada_locate.model.Client;
 import com.ada_locate.model.NaturalPerson;
-import com.ada_locate.model.Rent;
-import com.ada_locate.model.RentItens;
-import com.ada_locate.model.Vehicle;
-import com.ada_locate.model.enums.VehicleType;
+
 
 public class App 
 {
     public static void main( String[] args ){
-        // Vehicle v1 = new Vehicle("ABC-5555", VehicleType.PEQUENO);
-        // Vehicle v2 = new Vehicle("ABD-5555", VehicleType.MEDIO);
-        // Client c1 = new Client(new NaturalPerson("867.884.200-84"), "Jaiminho", null, null);
-        // Rent rent = new Rent(c1, 2);
-        // RentItens r1 = new RentItens(v1,rent);
-        // RentItens r2 = new RentItens(v2,rent);
+        
+        ClientController clientController = new ClientController();
 
-        DAO<Vehicle> dao = new DAO<>(Vehicle.class);
-        Vehicle vehicle = dao.getById("ACB5555");
-        if (vehicle != null)
-        System.out.println(vehicle.getType());
+        Client c1 = new Client(new NaturalPerson("548.890.740-82"), "Cleiton", "11111111", null);
 
-        // dao.startTransaction()
-        //     .addTransaction(v1)
-        //     .addTransaction(v2)
-        //     .addTransaction(c1)
-        //     .addTransaction(rent)
-        //     .addTransaction(r1)
-        //     .addTransaction(r2)
-        //     .commitTransaction();
-
+        System.out.println(clientController.add(c1));
 
     }
 }
