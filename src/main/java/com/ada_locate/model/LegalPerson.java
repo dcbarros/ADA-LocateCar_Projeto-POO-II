@@ -19,7 +19,7 @@ public class LegalPerson implements ClientIdentificator{
     @Override
     public void setIdentificator(String inputDocument) {
         if(DocumentUtils.isValidDocument(inputDocument)){
-            this.identificator = inputDocument;
+            this.identificator = DocumentUtils.convertDocumentToId(inputDocument);
         }else throw new IllegalArgumentException("O CNPJ é inválido");
     }
     

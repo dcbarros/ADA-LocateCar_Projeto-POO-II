@@ -1,0 +1,44 @@
+package com.ada_locate.model;
+
+import com.ada_locate.model.enums.VehicleType;
+import com.ada_locate.utils.LicencePlateUtils;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class Vehicle {
+    @Id
+    private String identificator;
+    private VehicleType type;
+    private Boolean isActive;
+
+    
+    public Vehicle(String identificator, VehicleType type) {
+        setIdentificator(identificator);
+        this.type = type;
+        this.isActive = true;
+    }
+
+    public String getIdentificator() {
+        return identificator;
+    }
+    public void setIdentificator(String identificator) {
+        if(LicencePlateUtils.isValidLicence(identificator)){
+            this.identificator = LicencePlateUtils.convertLicencePlateToId(identificator);
+        }else throw new IllegalArgumentException("A placa do veículo é inválida");
+    }
+    public VehicleType getType() {
+        return type;
+    }
+    public void setType(VehicleType type) {
+        this.type = type;
+    }
+    public Boolean getIsActive() {
+        return isActive;
+    }
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
+    }
+    
+}

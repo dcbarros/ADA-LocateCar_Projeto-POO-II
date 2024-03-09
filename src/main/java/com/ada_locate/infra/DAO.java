@@ -27,22 +27,22 @@ public class DAO<E> {
         this(null);
     }
 
-    private DAO<E> startTransaction(){
+    public DAO<E> startTransaction(){
         this.entityManager.getTransaction().begin();
         return this;
     }
 
-    private DAO<E> commitTransaction(){
+    public DAO<E> commitTransaction(){
         this.entityManager.getTransaction().commit();
         return this;
     }
 
-    private DAO<E> addTransaction(E entity){
+    public DAO<E> addTransaction(E entity){
         this.entityManager.persist(entity);
         return this;
     }
 
-    private DAO<E> mergeTransaction(E entity){
+    public DAO<E> mergeTransaction(E entity){
         this.entityManager.merge(entity);
         return this;
     }
