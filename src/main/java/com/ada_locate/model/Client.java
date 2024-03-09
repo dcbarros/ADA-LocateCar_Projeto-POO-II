@@ -4,6 +4,7 @@ package com.ada_locate.model;
 import com.ada_locate.model.interfaces.ClientIdentificator;
 import com.ada_locate.utils.DocumentUtils;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -12,6 +13,7 @@ public class Client {
 
     @Id
     private String id;
+    @Embedded
     private ClientIdentificator identificator;
     private String name;
     private String cep;
