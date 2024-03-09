@@ -1,13 +1,14 @@
 package com.ada_locate.model;
 
 import com.ada_locate.model.enums.VehicleType;
+import com.ada_locate.model.interfaces.Indentificator;
 import com.ada_locate.utils.LicencePlateUtils;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Vehicle {
+public class Vehicle implements Indentificator{
     @Id
     private String identificator;
     private VehicleType type;

@@ -2,6 +2,7 @@ package com.ada_locate.model;
 
 
 import com.ada_locate.model.interfaces.ClientIdentificator;
+import com.ada_locate.model.interfaces.Indentificator;
 import com.ada_locate.utils.DocumentUtils;
 
 import jakarta.persistence.Embedded;
@@ -9,7 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Client {
+public class Client{
 
     @Id
     private String id;

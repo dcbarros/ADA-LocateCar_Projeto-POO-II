@@ -2,14 +2,16 @@ package com.ada_locate.infra;
 
 import java.util.List;
 
+import com.ada_locate.model.interfaces.Indentificator;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 
-public class DAO<E> {
-    private static EntityManagerFactory entityManagerFactory;
-    private EntityManager entityManager;
+public class DAO<E extends Indentificator> {
+    protected static EntityManagerFactory entityManagerFactory;
+    protected EntityManager entityManager;
     private Class<E> entityClass;
 
     static{
@@ -70,6 +72,10 @@ public class DAO<E> {
         this.entityManager.close();
     }
 
+    public E getById(String id){
+        E entity = entityManager.find(entityClass, id);
+        return entity;
+    }
     // TODO: métodos de getById e existsId
 
 }
