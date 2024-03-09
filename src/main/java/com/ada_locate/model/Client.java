@@ -28,6 +28,9 @@ public class Client{
         this.complement = complement;
     }
 
+    public Client() {
+    }
+
     public String getName() {
         return name;
     }

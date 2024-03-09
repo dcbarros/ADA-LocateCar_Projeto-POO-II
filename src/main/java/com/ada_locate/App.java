@@ -18,7 +18,11 @@ public class App
         // RentItens r1 = new RentItens(v1,rent);
         // RentItens r2 = new RentItens(v2,rent);
 
-        DAO<Vehicle> dao = new DAO<>();
+        DAO<Vehicle> dao = new DAO<>(Vehicle.class);
+        Vehicle vehicle = dao.getById("ACB5555");
+        if (vehicle != null)
+        System.out.println(vehicle.getType());
+
         // dao.startTransaction()
         //     .addTransaction(v1)
         //     .addTransaction(v2)
@@ -27,7 +31,7 @@ public class App
         //     .addTransaction(r1)
         //     .addTransaction(r2)
         //     .commitTransaction();
-        System.out.println(dao.getById("ABC5555").getType());
+
 
     }
 }

@@ -14,7 +14,9 @@ public class Vehicle implements Indentificator{
     private VehicleType type;
     private Boolean isActive;
 
-    
+    public Vehicle() {
+    }
+
     public Vehicle(String identificator, VehicleType type) {
         setIdentificator(identificator);
         this.type = type;

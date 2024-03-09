@@ -2,14 +2,14 @@ package com.ada_locate.infra;
 
 import java.util.List;
 
-import com.ada_locate.model.interfaces.Indentificator;
+// import com.ada_locate.model.interfaces.Indentificator;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 
-public class DAO<E extends Indentificator> {
+public class DAO<E> {
     protected static EntityManagerFactory entityManagerFactory;
     protected EntityManager entityManager;
     private Class<E> entityClass;
@@ -72,10 +72,10 @@ public class DAO<E extends Indentificator> {
         this.entityManager.close();
     }
 
-    public E getById(String id){
+    public E getById(Object id) {
+        if(id == null) throw new IllegalArgumentException("Id não fornecido ou Nulo");
         E entity = entityManager.find(entityClass, id);
+        if(entity == null) return null;
         return entity;
     }
-    // TODO: métodos de getById e existsId
-
 }

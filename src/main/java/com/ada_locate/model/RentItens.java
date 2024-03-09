@@ -1,7 +1,5 @@
 package com.ada_locate.model;
 
-import com.ada_locate.model.interfaces.Indentificator;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
