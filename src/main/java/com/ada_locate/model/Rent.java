@@ -1,12 +1,16 @@
 package com.ada_locate.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Rent{
@@ -16,6 +20,8 @@ public class Rent{
 
     @ManyToOne
     private Client client;
+    @OneToMany(mappedBy = "rent")
+    List<RentItens> rentItens;
 
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;
@@ -28,6 +34,7 @@ public class Rent{
         this.dailyRental = dailyRental;
         this.checkOut = LocalDateTime.now().plusDays(dailyRental);
         this.isOpen = true;
+        this.rentItens = new ArrayList<>();
     }
 
     public Rent() {
@@ -72,5 +79,11 @@ public class Rent{
         this.isOpen = isOpen;
     }
 
-    
+    public List<RentItens> getRentItens() {
+        return rentItens;
+    }
+
+    public void setRentItens(List<RentItens> rentItens) {
+        this.rentItens = rentItens;
+    }
 }

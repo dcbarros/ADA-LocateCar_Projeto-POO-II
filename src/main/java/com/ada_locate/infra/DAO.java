@@ -2,12 +2,13 @@ package com.ada_locate.infra;
 
 import java.util.List;
 
-// import com.ada_locate.model.interfaces.Indentificator;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 public class DAO<E> {
     protected static EntityManagerFactory entityManagerFactory;
