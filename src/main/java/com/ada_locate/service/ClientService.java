@@ -43,8 +43,4 @@ public class ClientService {
         return true;
     }
 
-
-
-
-
 }

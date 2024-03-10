@@ -6,7 +6,10 @@
   <persistence-unit name="locadora_veiculos">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <class>com.ada_locate.model.Client</class> 
-
+    <class>com.ada_locate.model.Vehicle</class> 
+    <class>com.ada_locate.model.Rent</class> 
+    <class>com.ada_locate.model.RentItens</class> 
+    
     <properties>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" /> 
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/locadora_veiculos" /> 
