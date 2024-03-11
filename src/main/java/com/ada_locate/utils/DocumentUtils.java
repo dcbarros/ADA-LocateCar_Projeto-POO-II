@@ -29,6 +29,14 @@ public class DocumentUtils {
         }
     }
 
+    public static String documentType(String document){
+        document = convertDocumentToId(document);
+        if(document.length() == 11){
+            return "cpf";
+        }
+        return "cnpj";
+    }
+
     private static Boolean isValidCPF(String cpf){
         if(cpf.matches("(\\d)\\1*")) return false;
         int sum = 0;
