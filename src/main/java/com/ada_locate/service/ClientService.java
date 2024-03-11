@@ -2,7 +2,7 @@ package com.ada_locate.service;
 
 import com.ada_locate.infra.DAO;
 import com.ada_locate.model.Client;
-import com.ada_locate.model.Vehicle;
+import com.ada_locate.utils.DocumentUtils;
 
 import java.util.List;
 
@@ -26,6 +26,7 @@ public class ClientService {
     public List<Client> getAll(int limit, int offset) {return dao.getAll(limit, offset);}
 
     public Client getById(String id){
+        id = DocumentUtils.convertDocumentToId(id);
         if(dao.getById(id) == null){
             throw new IllegalArgumentException("Identificador não localizado no sistema.");
         }
