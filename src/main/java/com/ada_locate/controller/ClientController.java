@@ -18,7 +18,7 @@ public class ClientController {
     }
 
     public List<Client> getAll(int limit, int offset){
-        return this.clientService.getAll(0, 0);
+        return this.clientService.getAll(limit, offset);
     }
 
     public Client getClientByDocument(String id){
