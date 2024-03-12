@@ -18,7 +18,7 @@ public class RentOptions extends RentMain{
                             "3 - Listar ordens abertas" +
                             "4 - Buscar ordem\n" +
                             "5 - Fazer checkout" +
-                            "0 - Retornar ao menu anterior");
+                            "0 - Retornar ao menu anterior ");
             try {
                 option = sc.nextInt();
 
