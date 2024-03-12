@@ -43,9 +43,10 @@ public class App
         // t2.add(v3);
 
         // Client c1 = t3.getById("33379672050");
-        // Rent rent = new Rent(c1, 10);
+        // Rent rent = new Rent(c1, 4);
         // t1.addNewRentOrder(rent);
 
+        // t1.getAllRentOrdersActive();
         // t1.addRentItemToRentOrderByRentId(1L, "MUO2775");
         //t1.addRentItemToRentOrderByRentId(2L, "MDM-2084");
 
@@ -55,50 +56,50 @@ public class App
         //     System.out.println(" " + T.getVehicle().getIdentificator() + "\n");
         // }
         
-        RentInfo nf = t1.checkout(2L);
+        // RentInfo nf = t1.checkout(3L);
 
-        System.out.printf("""
-        Nome do Cliente: %s
-        Total de Carros Alugados: %d
-        Pegou as: %d/%d/%d %d:%d
-        Entregou as: %d/%d/%d %d:%d
-        Itens:
-        """,
-        nf.getClient().getName(),
-        nf.getItens().size(),
-        nf.getRent().getCheckIn().getDayOfMonth(),
-        nf.getRent().getCheckIn().getMonthValue(),
-        nf.getRent().getCheckIn().getYear(),
-        nf.getRent().getCheckIn().getHour(),
-        nf.getRent().getCheckIn().getMinute(),
-        nf.getRent().getCheckOut().getDayOfMonth(),
-        nf.getRent().getCheckOut().getMonthValue(),
-        nf.getRent().getCheckOut().getYear(),
-        nf.getRent().getCheckOut().getHour(),
-        nf.getRent().getCheckOut().getMinute()
-        );
+        // System.out.printf("""
+        // Nome do Cliente: %s
+        // Total de Carros Alugados: %d
+        // Pegou as: %d/%d/%d %d:%d
+        // Entregou as: %d/%d/%d %d:%d
+        // Itens:
+        // """,
+        // nf.getClient().getName(),
+        // nf.getItens().size(),
+        // nf.getRent().getCheckIn().getDayOfMonth(),
+        // nf.getRent().getCheckIn().getMonthValue(),
+        // nf.getRent().getCheckIn().getYear(),
+        // nf.getRent().getCheckIn().getHour(),
+        // nf.getRent().getCheckIn().getMinute(),
+        // nf.getRent().getCheckOut().getDayOfMonth(),
+        // nf.getRent().getCheckOut().getMonthValue(),
+        // nf.getRent().getCheckOut().getYear(),
+        // nf.getRent().getCheckOut().getHour(),
+        // nf.getRent().getCheckOut().getMinute()
+        // );
 
-        BigDecimal total = BigDecimal.ZERO;
-        for (int i = 0; i < nf.getItens().size(); i++) {
-            total = total.add(nf.getValues().get(i));
-            System.out.printf("""
-            %d - Veículo: X, Placa: %s\t\tR$ %.2f;
-            """,
-            (i+1),
-            nf.getItens().get(i).getVehicle().getIdentificator(),
-            nf.getValues().get(i)
-            );
-        }
+        // BigDecimal total = BigDecimal.ZERO;
+        // for (int i = 0; i < nf.getItens().size(); i++) {
+        //     total = total.add(nf.getValues().get(i));
+        //     System.out.printf("""
+        //     %d - Veículo: X, Placa: %s\t\tR$ %.2f;
+        //     """,
+        //     (i+1),
+        //     nf.getItens().get(i).getVehicle().getIdentificator(),
+        //     nf.getValues().get(i)
+        //     );
+        // }
         
-        System.out.printf("""
-        -------------------------------------------------------------
-        Total:\tR$ %.2f
-        Desconto: (%.2f %%)
-        Total com desconto:\tR$ %.2f
-        """,
-        total,
-        nf.getDiscount().multiply(new BigDecimal(100)),
-        total.multiply(BigDecimal.ONE.subtract(nf.getDiscount())));
+        // System.out.printf("""
+        // -------------------------------------------------------------
+        // Total:\tR$ %.2f
+        // Desconto: (%.2f %%)
+        // Total com desconto:\tR$ %.2f
+        // """,
+        // total,
+        // nf.getDiscount().multiply(new BigDecimal(100)),
+        // total.multiply(BigDecimal.ONE.subtract(nf.getDiscount())));
 
     }
 

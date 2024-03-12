@@ -42,6 +42,10 @@ public class RentService {
         return rentDAO.findByRentId(idRent);
     }
 
+    public List<Rent> getAllRentOrdersActive(int limit){
+        return rentDAO.getAllActivesRentOrder(limit, 0);
+    }
+
     public Boolean addNewRentOrder(Rent rentRequest){
 
         if(clientService.getById(rentRequest.getClient().getId()) == null) 
