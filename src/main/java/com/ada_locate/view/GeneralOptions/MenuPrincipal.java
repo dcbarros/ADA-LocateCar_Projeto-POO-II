@@ -1,4 +1,4 @@
-package com.ada_locate.view;
+package com.ada_locate.view.GeneralOptions;
 
 public class MenuPrincipal {
 
