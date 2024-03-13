@@ -1,32 +1,18 @@
 package com.ada_locate;
 
-import java.math.BigDecimal;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.List;
-
-import com.ada_locate.controller.ClientController;
-import com.ada_locate.infra.DAO;
-import com.ada_locate.model.Client;
-import com.ada_locate.model.LegalPerson;
-import com.ada_locate.model.NaturalPerson;
-import com.ada_locate.model.Rent;
-import com.ada_locate.model.RentItens;
-import com.ada_locate.model.Vehicle;
-import com.ada_locate.model.enums.VehicleType;
-import com.ada_locate.model.response.RentInfo;
-import com.ada_locate.service.ClientService;
-import com.ada_locate.service.RentService;
-import com.ada_locate.service.VehicleService;
+import com.ada_locate.view.GeneralOptions.MenuPrincipal;
 
 
 public class App 
 {
     public static void main( String[] args ){
+
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.inicial();
         
-        RentService t1 = new RentService();
-        VehicleService t2 = new VehicleService();
-        ClientService t3 = new ClientService();
+//        RentService t1 = new RentService();
+//        VehicleService t2 = new VehicleService();
+//        ClientService t3 = new ClientService();
 
         // Client clientNP = new Client(new NaturalPerson("333.796.720-50"), "Cleiton", "5555555", null);
         // Client clientLP = new Client(new LegalPerson("47.186.704/0001-64"), "Organizações Tabajara", "5555555", null);
