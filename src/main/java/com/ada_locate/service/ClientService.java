@@ -38,8 +38,8 @@ public class ClientService {
             throw new IllegalArgumentException("Identificador não localizado no sistema.");
         }
         Client client = dao.getById(id);
-        client.setCep(cep);
-        client.setComplement(complement);
+        if(cep != null || !cep.isBlank()){client.setCep(cep);}
+        if(complement != null || !complement.isBlank()){client.setComplement(complement);}
         dao.updateAtomicTransaction(client);
         return true;
     }
