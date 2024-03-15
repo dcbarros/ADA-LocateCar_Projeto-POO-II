@@ -1,24 +1,24 @@
-package com.ada_locate.view.VeiculoView;
+package com.ada_locate.view;
 
-import com.ada_locate.model.Client;
-import com.ada_locate.model.LegalPerson;
-import com.ada_locate.model.NaturalPerson;
+import com.ada_locate.controller.VehicleController;
 import com.ada_locate.model.Vehicle;
-import com.ada_locate.utils.DocumentUtils;
+import com.ada_locate.model.enums.VehicleType;
 import com.ada_locate.view.GeneralOptions.TypeOptions;
 
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class VehicleOptions implements TypeOptions {
+public class VehicleOptions extends TypeOptions {
+
+    VehicleController controller;
 
     public void options() {
         Scanner sc = new Scanner(System.in);
         int option = -1;
 
         while (option != 0) {
-            this.title("VEÍCULO");
+            title("VEÍCULO");
             System.out.println(
                     "1 - Cadastrar veículo\n" +
                             "2 - Buscar veículos\n" +
@@ -31,33 +31,33 @@ public class VehicleOptions implements TypeOptions {
                     case 0:
                         break;
                     case 1:
-                        this.title("VEÍCULO");
-                        this.add();
+                        title("VEÍCULO");
+                        add();
                         break;
                     case 2:
-                        this.title("VEÍCULO");
-                        this.findByid();
+                        title("VEÍCULO");
+                        findByid();
                         break;
                     case 3:
-                        this.title("VEÍCULO");
-                        this.readListVehicle();
+                        title("VEÍCULO");
+                        readListVehicle();
                         break;
 
                     case 4:
-                        this.title("VEÍCULO");
+                        title("VEÍCULO");
                         break;
                     default:
                         System.out.println("Opção inválida. Escolha uma das opções do menu.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Entrada invalida. Digite um numero inteiro, conforme" +
-                        " as opções do MenuController.");
+                        " as opções do Menu.");
                 sc.nextLine();
             }
         }
     }
 
-    public Vehicle add() {
+    public void add() {
         try {
             Scanner sc = new Scanner(System.in);
 
@@ -68,12 +68,15 @@ public class VehicleOptions implements TypeOptions {
             String identificator = sc.nextLine();
 
             System.out.println("Informe o tipo do veículo: \n");
-            String type = sc.nextLine();
+            VehicleType type = VehicleType.valueOf(sc.nextLine().toUpperCase());
 
 
-            return null;
+            Vehicle newVehicle = new Vehicle(identificator, type, model);
+            controller.addVehicle(newVehicle);
+
         } catch (InputMismatchException e) {
-            throw new InputMismatchException("Dados inválidos!");
+            System.out.println("Dados inválidos");
+            return;
         }
     }
 
@@ -81,22 +84,31 @@ public class VehicleOptions implements TypeOptions {
         try {
             Scanner sc = new Scanner(System.in);
             System.out.println("Informe a placa do veículo: \n");
-            Vehicle finded = null;
+            String plate = sc.nextLine();
+            Vehicle finded = controller.getVehicleByLicencePlate(plate);
 
             System.out.println("Dados do Veículo:\n" +
-                    "Modelo: " + "\n" +
-                    "Placa: " + "\n" +
-                    "Tipo: " + "."
+                    "Modelo: " + finded.getModel() + "\n" +
+                    "Placa: " + finded.getIdentificator() + "\n" +
+                    "Tipo: " + finded.getType() + "."
             );
         } catch (InputMismatchException e) {
-            throw new InputMismatchException("Dados inválidos");
+            System.out.println("Dados inválidos");
+            return;
         }
     }
 
-    public void readListVehicle(List<Vehicle> lista) {
-        for (Vehicle element : lista) {
-            System.out.println("Modelo: " + "\n" +
-                    "Placa: " + element.getIdentificator());
+    public void readListVehicle() {
+        try {
+            //alterar limit posteriormente!
+            List<Vehicle> lista = controller.getAll(100, 0);
+            for (Vehicle element : lista) {
+                System.out.println("Modelo: " + "\n" +
+                        "Placa: " + element.getIdentificator());
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Dados inválidos");
+            return;
         }
     }
 }

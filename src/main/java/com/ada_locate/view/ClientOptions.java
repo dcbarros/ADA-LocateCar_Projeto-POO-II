@@ -1,11 +1,9 @@
-package com.ada_locate.view.ClientView;
+package com.ada_locate.view;
 
 import com.ada_locate.controller.ClientController;
 import com.ada_locate.model.Client;
 import com.ada_locate.model.LegalPerson;
 import com.ada_locate.model.NaturalPerson;
-import com.ada_locate.model.interfaces.ClientIdentificator;
-import com.ada_locate.service.ClientService;
 import com.ada_locate.utils.DocumentUtils;
 import com.ada_locate.view.GeneralOptions.TypeOptions;
 
@@ -13,7 +11,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class ClientOptions implements TypeOptions {
+public class ClientOptions extends TypeOptions {
 
     ClientController controller;
 
@@ -22,7 +20,7 @@ public class ClientOptions implements TypeOptions {
         int option = -1;
 
         while (option != 0) {
-            this.title("CLIENTE");
+            title("CLIENTE");
             System.out.println(
                     "1 - Cadastrar Cliente\n" +
                             "2 - Buscar Cliente\n" +
@@ -36,21 +34,21 @@ public class ClientOptions implements TypeOptions {
                     case 0:
                         break;
                     case 1:
-                        this.title("CLIENTE");
-                        this.add();
+                        title("CLIENTE");
+                        add();
                         break;
                     case 2:
-                        this.title("CLIENTE");
-                        findByid();
+                        title("CLIENTE");
+                        findById();
                         break;
                     case 3:
-                        this.title("CLIENTE");
-                        this.update();
+                        title("CLIENTE");
+                        update();
                         break;
 
                     case 4:
-                        this.title("CLIENTE");
-                        this.readListClient(); //lista de Clientes
+                        title("CLIENTE");
+                        readListClient(); //lista de Clientes
 
                         break;
                     default:
@@ -58,13 +56,13 @@ public class ClientOptions implements TypeOptions {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Entrada invalida. Digite um numero inteiro, conforme" +
-                        " as opções do MenuController.");
+                        " as opções do Menu.");
                 sc.nextLine();
             }
         }
     }
 
-    public Client add() {
+    public void add() {
         try {
             Scanner sc = new Scanner(System.in);
             Client newClient = new Client();
@@ -89,17 +87,19 @@ public class ClientOptions implements TypeOptions {
             String complement = sc.nextLine();
             newClient.setComplement(complement);
 
-            return newClient;
+            controller.add(newClient);
+
         } catch (InputMismatchException e) {
             throw new InputMismatchException("Dados inválidos!");
         }
     }
 
-    public void findByid() {
+    public void findById() {
         try {
             Scanner sc = new Scanner(System.in);
             System.out.println("Informe o CPF/CNPJ do cliente: \n");
-            Client finded = null;
+            String document = sc.nextLine();
+            Client finded = controller.getClientByDocument(document);
 
             System.out.println("Dados do Cliente:\n" +
                     "Nome: " + finded.getName() + "\n" +
@@ -123,14 +123,17 @@ public class ClientOptions implements TypeOptions {
 
             System.out.println("Informe o complemento: \n");
             String complement = sc.nextLine();
-            // to do controller
+
+            controller.updateClient(identificator, cep, complement);
+
         } catch (InputMismatchException e) {
             throw new InputMismatchException("Dados inválidos");
         }
 
     }
 
-    public void readListClient(List<Client> lista) {
+    public void readListClient() {
+        List<Client> lista = controller.getAll(100, 0);
         for (Client element : lista) {
             System.out.println("Nome: " + element.getName() + "\n" +
                     DocumentUtils.documentType(element.getId()).toUpperCase() + ": " + element.getIdentificator());
