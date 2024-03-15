@@ -13,9 +13,10 @@ import java.util.Scanner;
 
 public class ClientOptions extends TypeOptions {
 
-    ClientController controller;
+    ClientController controller = new ClientController();
 
     public void options() {
+        this.limparTela();
         Scanner sc = new Scanner(System.in);
         int option = -1;
 
@@ -24,9 +25,9 @@ public class ClientOptions extends TypeOptions {
             System.out.println(
                     "1 - Cadastrar Cliente\n" +
                             "2 - Buscar Cliente\n" +
-                            "3 - Alterar dados do Cliente" +
+                            "3 - Alterar dados do Cliente\n" +
                             "4 - Listar Clientes\n" +
-                            "0 - Retornar ao menu anterior");
+                            "0 - Retornar ao menu anterior\nQual opção você deseja? ");
             try {
                 option = sc.nextInt();
 
@@ -64,28 +65,29 @@ public class ClientOptions extends TypeOptions {
 
     public void add() {
         try {
+            this.limparTela();
             Scanner sc = new Scanner(System.in);
-            Client newClient = new Client();
 
-            System.out.println("Informe o nome do cliente: \n");
+
+            System.out.println("Informe o nome do cliente: ");
             String name = sc.nextLine();
-            newClient.setName(name);
-
-            System.out.println("Informe o CPF ou CNPJ do cliente: \n");
+            
+            System.out.println("Informe o CPF ou CNPJ do cliente: ");
             String identificator = sc.nextLine();
-            if (DocumentUtils.documentType(identificator) == "cpf") {
-                newClient.setIdentificator(new NaturalPerson(identificator));
-            } else if (DocumentUtils.documentType(identificator) == "cnpj") {
-                newClient.setIdentificator(new LegalPerson(identificator));
-            }
 
-            System.out.println("Informe o Cep do cliente: \n");
+            System.out.println("Informe o Cep do cliente: ");
             String cep = sc.nextLine();
-            newClient.setCep(cep);
 
-            System.out.println("Informe o Complemento do cep: \n");
+
+            System.out.println("Informe o Complemento do cep: ");
             String complement = sc.nextLine();
-            newClient.setComplement(complement);
+            
+            Client newClient = new Client();
+            if (DocumentUtils.documentType(identificator) == "cpf") {
+                newClient = new Client(new NaturalPerson(identificator), name,cep,complement);
+            } else if (DocumentUtils.documentType(identificator) == "cnpj") {
+                newClient = new Client(new LegalPerson(identificator), name,cep,complement);
+            }
 
             controller.add(newClient);
 
@@ -96,6 +98,7 @@ public class ClientOptions extends TypeOptions {
 
     public void findById() {
         try {
+            this.limparTela();
             Scanner sc = new Scanner(System.in);
             System.out.println("Informe o CPF/CNPJ do cliente: \n");
             String document = sc.nextLine();
@@ -114,6 +117,7 @@ public class ClientOptions extends TypeOptions {
 
     public void update() {
         try {
+            this.limparTela();
             Scanner sc = new Scanner(System.in);
             System.out.println("Informe o CPF/CNPJ do cliente: \n");
             String identificator = sc.nextLine();
@@ -133,10 +137,11 @@ public class ClientOptions extends TypeOptions {
     }
 
     public void readListClient() {
+        this.limparTela();
         List<Client> lista = controller.getAll(100, 0);
         for (Client element : lista) {
             System.out.println("Nome: " + element.getName() + "\n" +
-                    DocumentUtils.documentType(element.getId()).toUpperCase() + ": " + element.getIdentificator());
+                    DocumentUtils.documentType(element.getId()).toUpperCase() + ": " + element.getId());
         }
     }
 }

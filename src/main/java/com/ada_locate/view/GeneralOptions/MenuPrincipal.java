@@ -9,15 +9,12 @@ import java.util.Scanner;
 
 public class MenuPrincipal extends TypeOptions{
 
-    VehicleOptions vehicleMenu;
-    RentOptions rentMenu;
-    ClientOptions clientMenu;
+    VehicleOptions vehicleMenu = new VehicleOptions();
+    RentOptions rentMenu = new RentOptions();
+    ClientOptions clientMenu = new ClientOptions();
 
-    public void limparTela(){
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
     public void faixa() {
+        this.limparTela();
         System.out.println("==========================\n" +
                 "   || ADA LOCATE CAR ||\n" +
                 "==========================\n" +
@@ -34,7 +31,7 @@ public class MenuPrincipal extends TypeOptions{
                     "1 - Veículo\n" +
                             "2 - Cliente\n" +
                             "3 - Aluguel;\n" +
-                            "0 - Sair");
+                            "0 - Sair\nQual opção você deseja? ");
             try {
                 option = sc.nextInt();
 

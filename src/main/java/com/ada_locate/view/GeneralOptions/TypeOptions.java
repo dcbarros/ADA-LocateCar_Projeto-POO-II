@@ -7,6 +7,9 @@ public abstract class TypeOptions {
         System.out.println("|| " + typeObject +" || =======\n");
     }
 
-
+    public void limparTela(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 }
 

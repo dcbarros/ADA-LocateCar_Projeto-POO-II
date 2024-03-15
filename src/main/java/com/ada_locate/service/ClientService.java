@@ -37,7 +37,7 @@ public class ClientService {
         if(dao.getById(id) == null){
             throw new IllegalArgumentException("Identificador não localizado no sistema.");
         }
-        Client client = dao.getById(id);
+        Client client = dao.getById(DocumentUtils.convertDocumentToId(id));
         if(cep != null || !cep.isBlank()){client.setCep(cep);}
         if(complement != null || !complement.isBlank()){client.setComplement(complement);}
         dao.updateAtomicTransaction(client);

@@ -11,19 +11,19 @@ import java.util.Scanner;
 
 public class VehicleOptions extends TypeOptions {
 
-    VehicleController controller;
+    VehicleController controller = new VehicleController();
 
     public void options() {
         Scanner sc = new Scanner(System.in);
         int option = -1;
-
+        this.limparTela();
         while (option != 0) {
             title("VEÍCULO");
             System.out.println(
                     "1 - Cadastrar veículo\n" +
                             "2 - Buscar veículos\n" +
                             "3 - Listar veículos\n" +
-                            "0 - Retornar ao menu anterior");
+                            "0 - Retornar ao menu anterior\nQual opção você deseja? ");
             try {
                 option = sc.nextInt();
 
@@ -59,17 +59,19 @@ public class VehicleOptions extends TypeOptions {
 
     public void add() {
         try {
+            this.limparTela();
             Scanner sc = new Scanner(System.in);
 
-            System.out.println("Informe o modelo do veículo: \n");
+            System.out.println("Informe o modelo do veículo: ");
             String model = sc.nextLine();
 
-            System.out.println("Informe a placa do veículo: \n");
+            System.out.println("Informe a placa do veículo: ");
             String identificator = sc.nextLine();
 
-            System.out.println("Informe o tipo do veículo: \n");
-            VehicleType type = VehicleType.valueOf(sc.nextLine().toUpperCase());
-
+            System.out.println("1-Pequeno\n2-Médio\n3-SUV\nInforme o número referente ao tipo do veículo: ");
+            Integer choice = sc.nextInt();
+            sc.nextLine();
+            VehicleType type = choice == 1 ? VehicleType.PEQUENO : choice == 2 ? VehicleType.MEDIO : VehicleType.SUV;
 
             Vehicle newVehicle = new Vehicle(identificator, type, model);
             controller.addVehicle(newVehicle);
@@ -82,8 +84,9 @@ public class VehicleOptions extends TypeOptions {
 
     public void findByid() {
         try {
+            this.limparTela();
             Scanner sc = new Scanner(System.in);
-            System.out.println("Informe a placa do veículo: \n");
+            System.out.println("Informe a placa do veículo: ");
             String plate = sc.nextLine();
             Vehicle finded = controller.getVehicleByLicencePlate(plate);
 
@@ -100,10 +103,11 @@ public class VehicleOptions extends TypeOptions {
 
     public void readListVehicle() {
         try {
+            this.limparTela();
             //alterar limit posteriormente!
             List<Vehicle> lista = controller.getAll(100, 0);
             for (Vehicle element : lista) {
-                System.out.println("Modelo: " + "\n" +
+                System.out.println("Modelo: " + element.getModel() + "\n" +
                         "Placa: " + element.getIdentificator());
             }
         } catch (InputMismatchException e) {
